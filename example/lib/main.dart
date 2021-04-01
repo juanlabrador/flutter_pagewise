@@ -51,6 +51,7 @@ class PagewiseGridViewExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return PagewiseGridView.count(
       pageSize: PAGE_SIZE,
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       crossAxisCount: 3,
       mainAxisSpacing: 8.0,
       crossAxisSpacing: 8.0,
@@ -241,7 +242,7 @@ class PagewiseSliverGridExample extends StatelessWidget {
 class BackendService {
   static Future<List<PostModel>> getPosts(offset, limit) async {
     final responseBody = (await http.get(
-            'http://jsonplaceholder.typicode.com/posts?_start=$offset&_limit=$limit'))
+            'https://jsonplaceholder.typicode.com/posts?_start=$offset&_limit=$limit'))
         .body;
 
     // The response body is an array of items
@@ -250,7 +251,7 @@ class BackendService {
 
   static Future<List<ImageModel>> getImages(offset, limit) async {
     final responseBody = (await http.get(
-            'http://jsonplaceholder.typicode.com/photos?_start=$offset&_limit=$limit'))
+            'https://jsonplaceholder.typicode.com/photos?_start=$offset&_limit=$limit'))
         .body;
 
     // The response body is an array of items.

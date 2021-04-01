@@ -531,6 +531,7 @@ class PagewiseListView<T> extends Pagewise<T> {
       LoadingBuilder loadingBuilder,
       RetryBuilder retryBuilder,
       NoItemsFoundBuilder noItemsFoundBuilder,
+      ScrollViewKeyboardDismissBehavior keyboardDismissBehavior,
       bool showRetry: true,
       @required ItemBuilder<T> itemBuilder,
       ErrorBuilder errorBuilder})
@@ -548,6 +549,7 @@ class PagewiseListView<T> extends Pagewise<T> {
             builder: (PagewiseState<T> state) {
               return ListView.builder(
                   itemExtent: itemExtent,
+                  keyboardDismissBehavior: keyboardDismissBehavior,
                   addAutomaticKeepAlives: addAutomaticKeepAlives,
                   scrollDirection: scrollDirection,
                   addRepaintBoundaries: addRepaintBoundaries,
@@ -594,6 +596,7 @@ class PagewiseGridView<T> extends Pagewise<T> {
       LoadingBuilder loadingBuilder,
       RetryBuilder retryBuilder,
       NoItemsFoundBuilder noItemsFoundBuilder,
+      ScrollViewKeyboardDismissBehavior keyboardDismissBehavior,
       bool showRetry: true,
       @required ItemBuilder<T> itemBuilder,
       ErrorBuilder errorBuilder})
@@ -612,6 +615,7 @@ class PagewiseGridView<T> extends Pagewise<T> {
               return GridView.builder(
                   reverse: reverse,
                   physics: physics,
+                  keyboardDismissBehavior: keyboardDismissBehavior,
                   cacheExtent: cacheExtent,
                   addRepaintBoundaries: addRepaintBoundaries,
                   scrollDirection: scrollDirection,
