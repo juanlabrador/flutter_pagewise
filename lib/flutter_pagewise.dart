@@ -404,7 +404,7 @@ class PagewiseState<T> extends State<Pagewise<T>> {
 class PagewiseLoadController<T> extends ChangeNotifier {
   List<T>? _loadedItems;
   late List _appendedItems;
-  int _numberOfLoadedPages=0;
+  int _numberOfLoadedPages = 0;
   bool? _hasMoreItems;
   Object? _error;
   late bool _isFetching;
@@ -531,7 +531,8 @@ class PagewiseListView<T> extends Pagewise<T> {
       LoadingBuilder? loadingBuilder,
       RetryBuilder? retryBuilder,
       NoItemsFoundBuilder? noItemsFoundBuilder,
-      ScrollViewKeyboardDismissBehavior? keyboardDismissBehavior,
+      ScrollViewKeyboardDismissBehavior keyboardDismissBehavior =
+          ScrollViewKeyboardDismissBehavior.manual,
       bool showRetry: true,
       required ItemBuilder<T> itemBuilder,
       ErrorBuilder? errorBuilder})
@@ -596,7 +597,8 @@ class PagewiseGridView<T> extends Pagewise<T> {
       LoadingBuilder? loadingBuilder,
       RetryBuilder? retryBuilder,
       NoItemsFoundBuilder? noItemsFoundBuilder,
-      ScrollViewKeyboardDismissBehavior? keyboardDismissBehavior,
+      ScrollViewKeyboardDismissBehavior keyboardDismissBehavior =
+          ScrollViewKeyboardDismissBehavior.manual,
       bool showRetry: true,
       required ItemBuilder<T> itemBuilder,
       ErrorBuilder? errorBuilder})
