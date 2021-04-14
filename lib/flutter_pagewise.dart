@@ -2,6 +2,7 @@ library flutter_pagewise;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_pagewise/helpers/grid_helpers.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 typedef Widget ItemBuilder<T>(BuildContext context, T entry, int index);
 typedef Future<List<T>> PageFuture<T>(int? pageIndex);
@@ -702,6 +703,70 @@ class PagewiseGridView<T> extends Pagewise<T> {
                           crossAxisSpacing: crossAxisSpacing,
                           mainAxisSpacing: mainAxisSpacing,
                           itemCount: state._itemCount),
+                  itemCount: state._itemCount,
+                  itemBuilder: state._itemBuilder);
+            });
+}
+
+class PagewiseStaggeredGridView<T> extends Pagewise<T> {
+  /// Creates a Pagewise GridView with a crossAxisCount.
+  ///
+  /// All the properties are either those documented for normal [GridViews](https://docs.flutter.io/flutter/widgets/GridView-class.html)
+  /// or those inherited from [Pagewise]
+  PagewiseStaggeredGridView.count(
+      {Key? key,
+      EdgeInsetsGeometry? padding,
+      required int crossAxisCount,
+      double childAspectRatio = 1.0,
+      double crossAxisSpacing = 0.0,
+      double mainAxisSpacing = 0.0,
+      bool addSemanticIndexes = true,
+      int? semanticChildCount,
+      bool? primary,
+      bool shrinkWrap: false,
+      ScrollController? controller,
+      PagewiseLoadController<T>? pageLoadController,
+      bool addAutomaticKeepAlives: true,
+      Axis scrollDirection: Axis.vertical,
+      bool addRepaintBoundaries: true,
+      double? cacheExtent,
+      ScrollPhysics? physics,
+      bool reverse: false,
+      int? pageSize,
+      PageFuture<T>? pageFuture,
+      LoadingBuilder? loadingBuilder,
+      RetryBuilder? retryBuilder,
+      NoItemsFoundBuilder? noItemsFoundBuilder,
+      bool showRetry: true,
+      required ItemBuilder<T> itemBuilder,
+      ErrorBuilder? errorBuilder})
+      : super(
+            pageSize: pageSize,
+            pageFuture: pageFuture,
+            pageLoadController: pageLoadController,
+            key: key,
+            loadingBuilder: loadingBuilder,
+            retryBuilder: retryBuilder,
+            showRetry: showRetry,
+            itemBuilder: itemBuilder,
+            errorBuilder: errorBuilder,
+            noItemsFoundBuilder: noItemsFoundBuilder,
+            builder: (PagewiseState<T> state) {
+              return StaggeredGridView.countBuilder(
+                  reverse: reverse,
+                  physics: physics,
+                  addRepaintBoundaries: addRepaintBoundaries,
+                  scrollDirection: scrollDirection,
+                  addAutomaticKeepAlives: addAutomaticKeepAlives,
+                  controller: controller,
+                  primary: primary,
+                  shrinkWrap: shrinkWrap,
+                  padding: padding,
+                  staggeredTileBuilder: (int index) =>
+                      StaggeredTile.count(2, index.isEven ? 2 : 1),
+                  mainAxisSpacing: mainAxisSpacing,
+                  crossAxisSpacing: crossAxisSpacing,
+                  crossAxisCount: crossAxisCount,
                   itemCount: state._itemCount,
                   itemBuilder: state._itemBuilder);
             });

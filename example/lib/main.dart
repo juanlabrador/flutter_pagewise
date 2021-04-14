@@ -19,7 +19,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 5,
       child: Scaffold(
           appBar: AppBar(
             title: Text('Pagewise'),
@@ -28,6 +28,7 @@ class MyHomePage extends StatelessWidget {
                 text: 'List',
               ),
               Tab(text: 'Grid'),
+              Tab(text: 'Staggered Grid'),
               Tab(text: 'SliverList'),
               Tab(text: 'SliverGrid')
             ]),
@@ -36,6 +37,7 @@ class MyHomePage extends StatelessWidget {
             children: [
               PagewiseListViewExample(),
               PagewiseGridViewExample(),
+              PagewiseStaggeredGridViewExample(),
               PagewiseSliverListExample(),
               PagewiseSliverGridExample()
             ],
@@ -104,6 +106,64 @@ class PagewiseGridViewExample extends StatelessWidget {
   }
 }
 
+class PagewiseStaggeredGridViewExample extends StatelessWidget {
+  static const int PAGE_SIZE = 6;
+
+  @override
+  Widget build(BuildContext context) {
+    return PagewiseStaggeredGridView<ImageModel>.count(
+      pageSize: PAGE_SIZE,
+      crossAxisCount: 4,
+      mainAxisSpacing: 4.0,
+      crossAxisSpacing: 4.0,
+      padding: EdgeInsets.all(15.0),
+      itemBuilder: this._itemBuilder,
+      pageFuture: (pageIndex) =>
+          BackendService.getImages(pageIndex! * PAGE_SIZE, PAGE_SIZE),
+    );
+  }
+
+  Widget _itemBuilder(context, ImageModel entry, _) {
+    return Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey[600]!),
+        ),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      image: DecorationImage(
+                          image: NetworkImage(entry.thumbnailUrl!),
+                          fit: BoxFit.fill)),
+                ),
+              ),
+              SizedBox(height: 8.0),
+              Expanded(
+                child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8.0),
+                    child: SizedBox(
+                        height: 30.0,
+                        child: SingleChildScrollView(
+                            child: Text(entry.title!,
+                                style: TextStyle(fontSize: 12.0))))),
+              ),
+              SizedBox(height: 8.0),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                child: Text(
+                  entry.id,
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              SizedBox(height: 8.0)
+            ]));
+  }
+}
+
 class PagewiseListViewExample extends StatelessWidget {
   static const int PAGE_SIZE = 10;
 
@@ -113,8 +173,7 @@ class PagewiseListViewExample extends StatelessWidget {
         pageSize: PAGE_SIZE,
         itemBuilder: this._itemBuilder,
         pageFuture: (pageIndex) =>
-            BackendService.getPosts(pageIndex! * PAGE_SIZE, PAGE_SIZE)
-    );
+            BackendService.getPosts(pageIndex! * PAGE_SIZE, PAGE_SIZE));
   }
 
   Widget _itemBuilder(context, PostModel entry, _) {
@@ -242,26 +301,26 @@ class PagewiseSliverGridExample extends StatelessWidget {
 
 class BackendService {
   static Future<List<PostModel>> getPosts(offset, limit) async {
-    final responseBody = (await http.get(
-            Uri.parse('https://jsonplaceholder.typicode.com/posts?_start=$offset&_limit=$limit')))
+    final responseBody = (await http.get(Uri.parse(
+            'https://jsonplaceholder.typicode.com/posts?_start=$offset&_limit=$limit')))
         .body;
 
     // The response body is an array of items
     var postList = PostModel.fromJsonList(json.decode(responseBody));
-    if(postList == null) {
+    if (postList == null) {
       postList = List<PostModel>.empty();
     }
     return postList;
   }
 
   static Future<List<ImageModel>> getImages(offset, limit) async {
-    final responseBody = (await http.get(
-            Uri.parse('https://jsonplaceholder.typicode.com/photos?_start=$offset&_limit=$limit')))
+    final responseBody = (await http.get(Uri.parse(
+            'https://jsonplaceholder.typicode.com/photos?_start=$offset&_limit=$limit')))
         .body;
 
     // The response body is an array of items.
     var imageList = ImageModel.fromJsonList(json.decode(responseBody));
-    if(imageList == null) {
+    if (imageList == null) {
       imageList = List<ImageModel>.empty();
     }
     return imageList;
