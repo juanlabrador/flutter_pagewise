@@ -423,7 +423,7 @@ class PagewiseLoadController<T> extends ChangeNotifier {
   /// Creates a PagewiseLoadController.
   ///
   /// You must provide both the [pageFuture] and the [pageSize]
-  PagewiseLoadController({required this.pageFuture, required this.pageSize});
+  PagewiseLoadController({this.pageFuture, required this.pageSize});
 
   /// The list of items that have already been loaded
   List<T>? get loadedItems => this._loadedItems;
@@ -737,6 +737,7 @@ class PagewiseStaggeredGridView<T> extends Pagewise<T> {
       LoadingBuilder? loadingBuilder,
       RetryBuilder? retryBuilder,
       NoItemsFoundBuilder? noItemsFoundBuilder,
+      StaggeredTile? staggeredTile,
       bool showRetry: true,
       required ItemBuilder<T> itemBuilder,
       ErrorBuilder? errorBuilder})
@@ -762,8 +763,7 @@ class PagewiseStaggeredGridView<T> extends Pagewise<T> {
                   primary: primary,
                   shrinkWrap: shrinkWrap,
                   padding: padding,
-                  staggeredTileBuilder: (int index) =>
-                      StaggeredTile.count(2, index.isEven ? 2 : 1),
+                  staggeredTileBuilder: (int index) => staggeredTile,
                   mainAxisSpacing: mainAxisSpacing,
                   crossAxisSpacing: crossAxisSpacing,
                   crossAxisCount: crossAxisCount,
