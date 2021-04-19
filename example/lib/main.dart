@@ -108,11 +108,13 @@ class PagewiseGridViewExample extends StatelessWidget {
 
 class PagewiseStaggeredGridViewExample extends StatelessWidget {
   static const int PAGE_SIZE = 6;
+  final PagewiseLoadController<ImageModel> controller =
+      PagewiseLoadController(pageSize: 6);
 
   @override
   Widget build(BuildContext context) {
     return PagewiseStaggeredGridView<ImageModel>.count(
-      pageSize: PAGE_SIZE,
+      pageLoadController: controller,
       crossAxisCount: 4,
       mainAxisSpacing: 4.0,
       crossAxisSpacing: 4.0,

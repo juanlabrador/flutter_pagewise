@@ -167,9 +167,7 @@ abstract class Pagewise<T> extends StatefulWidget {
         assert((pageLoadController == null &&
                 pageSize != null &&
                 pageFuture != null) ||
-            (pageLoadController != null &&
-                pageSize == null &&
-                pageFuture == null)),
+            (pageLoadController != null && pageSize == null)),
         assert(showRetry == false || errorBuilder == null,
             'Cannot specify showRetry and errorBuilder at the same time'),
         assert(showRetry == true || retryBuilder == null,
@@ -195,6 +193,8 @@ class PagewiseState<T> extends State<Pagewise<T>> {
     if (widget.pageLoadController == null) {
       this._controller = PagewiseLoadController<T>(
           pageFuture: widget.pageFuture, pageSize: widget.pageSize);
+    } else {
+      widget.pageLoadController?.setPageLoader(widget.pageFuture);
     }
 
     this._effectiveController!.init();
@@ -415,7 +415,7 @@ class PagewiseLoadController<T> extends ChangeNotifier {
   /// It is provided with the page index, and expected to return a [Future](https://api.dartlang.org/stable/1.24.3/dart-async/Future-class.html) that
   /// resolves to a list of entries. Please make sure to return only [pageSize]
   /// or less entries (in the case of the last page) for each page.
-  final PageFuture<T>? pageFuture;
+  PageFuture<T>? pageFuture;
 
   /// The number  of entries per page
   final int? pageSize;
@@ -444,6 +444,12 @@ class PagewiseLoadController<T> extends ChangeNotifier {
   /// Called to initialize the controller. Same as [reset]
   void init() {
     this.reset();
+  }
+
+  void setPageLoader(PageFuture<T>? pageFuture) {
+    this.pageFuture = pageFuture;
+    reset();
+    fetchNewPage();
   }
 
   /// Resets all the information of the controller
