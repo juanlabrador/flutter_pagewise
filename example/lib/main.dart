@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_pagewise/flutter_pagewise.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:http/http.dart' as http;
 
 void main() => runApp(new MyApp());
@@ -116,8 +117,13 @@ class PagewiseStaggeredGridViewExample extends StatelessWidget {
     return PagewiseStaggeredGridView<ImageModel>.count(
       pageLoadController: controller,
       crossAxisCount: 4,
+      shrinkWrap: true,
       mainAxisSpacing: 4.0,
       crossAxisSpacing: 4.0,
+      staggeredTileBuilder: (index) {
+        print(index);
+        return StaggeredTile.fit(index == 0 ? 4 : 2);
+      },
       padding: EdgeInsets.all(15.0),
       itemBuilder: this._itemBuilder,
       pageFuture: (pageIndex) =>

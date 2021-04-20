@@ -286,12 +286,10 @@ class PagewiseState<T> extends State<Pagewise<T>> {
   }
 
   Widget _getLoadingWidget() {
-    return widget.loadingBuilder != null
-        ? widget.loadingBuilder!(context)
-        : Container(
-            alignment: Alignment.topCenter,
-            margin: EdgeInsets.only(top: 15),
-            child: CircularProgressIndicator());
+    return this._getStandardContainer(
+        child: widget.loadingBuilder != null
+            ? widget.loadingBuilder!(context)
+            : CircularProgressIndicator());
   }
 
   Widget _getNoItemsFoundWidget() {
@@ -745,7 +743,7 @@ class PagewiseStaggeredGridView<T> extends Pagewise<T> {
       LoadingBuilder? loadingBuilder,
       RetryBuilder? retryBuilder,
       NoItemsFoundBuilder? noItemsFoundBuilder,
-      StaggeredTile? staggeredTile,
+      IndexedStaggeredTileBuilder? staggeredTileBuilder,
       bool showRetry: true,
       required ItemBuilder<T> itemBuilder,
       ErrorBuilder? errorBuilder})
@@ -771,7 +769,7 @@ class PagewiseStaggeredGridView<T> extends Pagewise<T> {
                   primary: primary,
                   shrinkWrap: shrinkWrap,
                   padding: padding,
-                  staggeredTileBuilder: (int index) => staggeredTile,
+                  staggeredTileBuilder: staggeredTileBuilder!,
                   mainAxisSpacing: mainAxisSpacing,
                   crossAxisSpacing: crossAxisSpacing,
                   crossAxisCount: crossAxisCount,
