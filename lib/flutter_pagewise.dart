@@ -410,7 +410,7 @@ class PagewiseLoadController<T> extends ChangeNotifier {
   int _numberOfLoadedPages = 0;
   bool? _hasMoreItems;
   Object? _error;
-  late bool _isFetching;
+  late bool _isFetching = false;
 
   /// Called whenever a new page (or batch) is to be fetched
   ///
@@ -450,7 +450,6 @@ class PagewiseLoadController<T> extends ChangeNotifier {
 
   void setPageLoader(PageFuture<T>? pageFuture) {
     this.pageFuture = pageFuture;
-    //reset();
     fetchNewPage();
   }
 
