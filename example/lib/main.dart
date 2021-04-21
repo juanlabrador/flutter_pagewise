@@ -114,7 +114,7 @@ class PagewiseStaggeredGridViewExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PagewiseStaggeredGridView<ImageModel>.count(
+    return PagewiseStaggeredGridView.count(
       pageLoadController: controller,
       crossAxisCount: 4,
       shrinkWrap: true,
@@ -136,39 +136,13 @@ class PagewiseStaggeredGridViewExample extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey[600]!),
         ),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      image: DecorationImage(
-                          image: NetworkImage(entry.thumbnailUrl!),
-                          fit: BoxFit.fill)),
-                ),
-              ),
-              SizedBox(height: 8.0),
-              Expanded(
-                child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0),
-                    child: SizedBox(
-                        height: 30.0,
-                        child: SingleChildScrollView(
-                            child: Text(entry.title!,
-                                style: TextStyle(fontSize: 12.0))))),
-              ),
-              SizedBox(height: 8.0),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.0),
-                child: Text(
-                  entry.id,
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ),
-              SizedBox(height: 8.0)
-            ]));
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.grey[200],
+              image: DecorationImage(
+                  image: NetworkImage(entry.thumbnailUrl!),
+                  fit: BoxFit.fill)),
+        ));
   }
 }
 

@@ -720,9 +720,13 @@ class PagewiseStaggeredGridView<T> extends Pagewise<T> {
   ///
   /// All the properties are either those documented for normal [GridViews](https://docs.flutter.io/flutter/widgets/GridView-class.html)
   /// or those inherited from [Pagewise]
-  PagewiseStaggeredGridView.builder(
+  PagewiseStaggeredGridView.count(
       {Key? key,
       EdgeInsetsGeometry? padding,
+      required int crossAxisCount,
+      double childAspectRatio = 1.0,
+      double crossAxisSpacing = 0.0,
+      double mainAxisSpacing = 0.0,
       bool addSemanticIndexes = true,
       int? semanticChildCount,
       bool? primary,
@@ -740,7 +744,7 @@ class PagewiseStaggeredGridView<T> extends Pagewise<T> {
       LoadingBuilder? loadingBuilder,
       RetryBuilder? retryBuilder,
       NoItemsFoundBuilder? noItemsFoundBuilder,
-      SliverStaggeredGridDelegate? gridDelegate,
+      IndexedStaggeredTileBuilder? staggeredTileBuilder,
       bool showRetry: true,
       required ItemBuilder<T> itemBuilder,
       ErrorBuilder? errorBuilder})
@@ -756,7 +760,7 @@ class PagewiseStaggeredGridView<T> extends Pagewise<T> {
             errorBuilder: errorBuilder,
             noItemsFoundBuilder: noItemsFoundBuilder,
             builder: (PagewiseState<T> state) {
-              return StaggeredGridView.builder(
+              return StaggeredGridView.countBuilder(
                   reverse: reverse,
                   physics: physics,
                   addRepaintBoundaries: addRepaintBoundaries,
@@ -766,7 +770,10 @@ class PagewiseStaggeredGridView<T> extends Pagewise<T> {
                   primary: primary,
                   shrinkWrap: shrinkWrap,
                   padding: padding,
-                  gridDelegate: gridDelegate!,
+                  staggeredTileBuilder: staggeredTileBuilder!,
+                  mainAxisSpacing: mainAxisSpacing,
+                  crossAxisSpacing: crossAxisSpacing,
+                  crossAxisCount: crossAxisCount,
                   itemCount: state._itemCount,
                   itemBuilder: state._itemBuilder);
             });
