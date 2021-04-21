@@ -723,9 +723,6 @@ class PagewiseStaggeredGridView<T> extends Pagewise<T> {
   PagewiseStaggeredGridView.builder(
       {Key? key,
       EdgeInsetsGeometry? padding,
-      double childAspectRatio = 1.0,
-      double crossAxisSpacing = 0.0,
-      double mainAxisSpacing = 0.0,
       bool addSemanticIndexes = true,
       int? semanticChildCount,
       bool? primary,
@@ -743,7 +740,6 @@ class PagewiseStaggeredGridView<T> extends Pagewise<T> {
       LoadingBuilder? loadingBuilder,
       RetryBuilder? retryBuilder,
       NoItemsFoundBuilder? noItemsFoundBuilder,
-      required IndexedStaggeredTileBuilder staggeredTileBuilder,
       SliverStaggeredGridDelegate? gridDelegate,
       bool showRetry: true,
       required ItemBuilder<T> itemBuilder,
