@@ -484,10 +484,10 @@ class PagewiseLoadController<T> extends ChangeNotifier {
       // Get length accounting for possible null Future return. We'l treat a null Future as an empty return
       final int length = (page.length);
 
-      if (length > this.pageSize!) {
-        this._isFetching = false;
-        throw ('Page length ($length) is greater than the maximum size (${this.pageSize})');
-      }
+      //if (length > this.pageSize!) {
+      //  this._isFetching = false;
+      //  throw ('Page length ($length) is greater than the maximum size (${this.pageSize})');
+      //}
 
       if (length > 0 && length < this.pageSize!) {
         // This should only happen when loading the last page.
