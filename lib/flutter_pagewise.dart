@@ -450,7 +450,8 @@ class PagewiseLoadController<T> extends ChangeNotifier {
 
   void setPageLoader(PageFuture<T>? pageFuture) {
     this.pageFuture = pageFuture;
-    fetchNewPage();
+    this._isFetching = false;
+    notifyListeners();
   }
 
   /// Resets all the information of the controller
