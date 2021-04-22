@@ -939,3 +939,45 @@ class PagewiseSliverGrid<T> extends Pagewise<T> {
               );
             });
 }
+
+class PagewiseStaggeredSliverGrid<T> extends Pagewise<T> {
+  /// Creates a Pagewise SliverGrid with a crossAxisCount.
+  ///
+  /// All the properties are either those documented for normal [SliverGrid](https://docs.flutter.io/flutter/widgets/SliverGrid-class.html)
+  /// or those inherited from [Pagewise]
+  PagewiseStaggeredSliverGrid.count(
+      {Key? key,
+      required int crossAxisCount,
+      double crossAxisSpacing = 0.0,
+      double mainAxisSpacing = 0.0,
+      PagewiseLoadController<T>? pageLoadController,
+      int? pageSize,
+      IndexedStaggeredTileBuilder? staggeredTileBuilder,
+      PageFuture<T>? pageFuture,
+      LoadingBuilder? loadingBuilder,
+      RetryBuilder? retryBuilder,
+      NoItemsFoundBuilder? noItemsFoundBuilder,
+      bool showRetry: true,
+      required ItemBuilder<T> itemBuilder,
+      ErrorBuilder? errorBuilder})
+      : super(
+            pageSize: pageSize,
+            pageFuture: pageFuture,
+            pageLoadController: pageLoadController,
+            key: key,
+            loadingBuilder: loadingBuilder,
+            retryBuilder: retryBuilder,
+            showRetry: showRetry,
+            itemBuilder: itemBuilder,
+            errorBuilder: errorBuilder,
+            noItemsFoundBuilder: noItemsFoundBuilder,
+            builder: (PagewiseState<T> state) {
+              return SliverStaggeredGrid.countBuilder(
+                  staggeredTileBuilder: staggeredTileBuilder!,
+                  crossAxisCount: crossAxisCount,
+                  itemBuilder: state._itemBuilder,
+                  mainAxisSpacing: mainAxisSpacing,
+                  crossAxisSpacing: crossAxisSpacing,
+                  itemCount: state._itemCount);
+            });
+}
