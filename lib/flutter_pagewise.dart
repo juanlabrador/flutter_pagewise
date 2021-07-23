@@ -443,6 +443,15 @@ class PagewiseLoadController<T> extends ChangeNotifier {
   bool get noItemsFound =>
       this._loadedItems!.length == 0 && this.hasMoreItems == false;
 
+  void update(int index, T? data) {
+    if (data != null) {
+      if (_loadedItems?.isNotEmpty == true) {
+        _loadedItems?[index] = data;
+        notifyListeners();
+      }
+    }
+  }
+
   /// Called to initialize the controller. Same as [reset]
   void init() {
     this.reset();
