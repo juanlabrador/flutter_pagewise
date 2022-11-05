@@ -122,7 +122,7 @@ class PagewiseStaggeredGridViewExample extends StatelessWidget {
       crossAxisSpacing: 4.0,
       staggeredTileBuilder: (index) {
         print(index);
-        return StaggeredTile.fit(2);
+        return IndexedStaggeredTileBuilder.fit(2);
       },
       padding: EdgeInsets.all(15.0),
       itemBuilder: this._itemBuilder,
