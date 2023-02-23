@@ -38,7 +38,7 @@ class MyHomePage extends StatelessWidget {
             children: [
               PagewiseListViewExample(),
               PagewiseGridViewExample(),
-              PagewiseStaggeredGridViewExample(),
+              //PagewiseStaggeredGridViewExample(),
               PagewiseSliverListExample(),
               PagewiseSliverGridExample()
             ],
@@ -107,7 +107,7 @@ class PagewiseGridViewExample extends StatelessWidget {
   }
 }
 
-class PagewiseStaggeredGridViewExample extends StatelessWidget {
+/*class PagewiseStaggeredGridViewExample extends StatelessWidget {
   static const int PAGE_SIZE = 6;
   final PagewiseLoadController<ImageModel> controller =
       PagewiseLoadController(pageSize: 20);
@@ -170,7 +170,7 @@ class PagewiseStaggeredGridViewExample extends StatelessWidget {
               SizedBox(height: 8.0)
             ]));
   }
-}
+}*/
 
 class PagewiseListViewExample extends StatelessWidget {
   static const int PAGE_SIZE = 10;

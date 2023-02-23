@@ -730,7 +730,7 @@ class PagewiseGridView<T> extends Pagewise<T> {
             });
 }
 
-class PagewiseStaggeredGridView<T> extends Pagewise<T> {
+/*class PagewiseStaggeredGridView<T> extends Pagewise<T> {
   /// Creates a Pagewise GridView with a crossAxisCount.
   ///
   /// All the properties are either those documented for normal [GridViews](https://docs.flutter.io/flutter/widgets/GridView-class.html)
@@ -792,7 +792,7 @@ class PagewiseStaggeredGridView<T> extends Pagewise<T> {
                   itemCount: state._itemCount,
                   itemBuilder: state._itemBuilder);
             });
-}
+}*/
 
 int _kDefaultSemanticIndexCallback(Widget _, int localIndex) => localIndex;
 
@@ -954,7 +954,7 @@ class PagewiseSliverGrid<T> extends Pagewise<T> {
             });
 }
 
-class PagewiseStaggeredSliverGrid<T> extends Pagewise<T> {
+/*class PagewiseStaggeredSliverGrid<T> extends Pagewise<T> {
   /// Creates a Pagewise SliverGrid with a crossAxisCount.
   ///
   /// All the properties are either those documented for normal [SliverGrid](https://docs.flutter.io/flutter/widgets/SliverGrid-class.html)
@@ -994,4 +994,4 @@ class PagewiseStaggeredSliverGrid<T> extends Pagewise<T> {
                   crossAxisSpacing: crossAxisSpacing,
                   itemCount: state._itemCount);
             });
-}
+}*/
